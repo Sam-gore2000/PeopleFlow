@@ -1,0 +1,69 @@
+# LionReach HRMS - production stack
+#   web      Caddy: HTTPS + the React app, forwards /api and /uploads to the backend (only public container)
+#   backend  Node/Express API
+#   mongo    MongoDB (private: not reachable from the internet)
+# Easiest: run  ./deploy.sh  (creates .env with random passwords, starts everything,
+# prints the login details). Manual: copy .env.docker.example to .env, fill it in, then
+#   docker compose up -d --build
+# Full guide: DEPLOY.md
+
+name: hrms
+
+services:
+  mongo:
+    # mongo:7 needs a CPU with AVX; deploy.sh switches to mongo:4.4 on older VPS CPUs.
+    image: ${MONGO_IMAGE:-mongo:7}
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-hrms}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:?Set MONGO_ROOT_PASSWORD in .env}
+    command: ["--wiredTigerCacheSizeGB", "0.25"]   # keeps MongoDB small on a 1-2 GB VPS
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      # mongosh (Mongo 6+) or mongo (Mongo 4.4)
+      test: ["CMD-SHELL", "mongosh --quiet --eval \"db.adminCommand('ping').ok\" || mongo --quiet --eval \"db.adminCommand('ping').ok\""]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://${MONGO_ROOT_USER:-hrms}:${MONGO_ROOT_PASSWORD}@mongo:27017/hrms?authSource=admin
+      DISABLE_MEMORY_FALLBACK: "true"
+      UPLOAD_DIR: /app/uploads
+      TRUST_PROXY: "1"
+      CLIENT_ORIGIN: ${PUBLIC_URL:?Set PUBLIC_URL in .env}
+      COOKIE_SECURE: ${COOKIE_SECURE:-true}
+    volumes:
+      - uploads:/app/uploads
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:-:80}
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  mongo-data:     # the database
+  uploads:        # profile photos and other uploaded files
+  caddy-data:     # HTTPS certificates
+  caddy-config:

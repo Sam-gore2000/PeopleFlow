@@ -1,0 +1,20 @@
+{
+  "name": "hrms-react-vite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "React Vite frontend for the migrated HRMS portal.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.2.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^8.3.0"
+  }
+}

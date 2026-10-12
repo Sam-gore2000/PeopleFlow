@@ -1,0 +1,1276 @@
+/* ========================================
+   RESPONSIVE CSS - CLEANED & ORGANIZED
+   HRM System - Mobile First Approach
+======================================== */
+
+/* ==========================================
+   TABLET & BELOW (991px and down)
+========================================== */
+
+
+
+#inputdate::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+@media (max-width: 991px) {
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+        z-index: 9999;
+        transform: translateX(0);
+        transition: transform 0.3s ease;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        height: 100%;
+    }
+
+    body.sidebar-collapsed .sidebar {
+        transform: translateX(-100%);
+    }
+
+    /* Sidebar overlay when visible */
+    body:not(.sidebar-collapsed) .sidebar::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: var(--sidebar-width);
+        width: calc(100vw - var(--sidebar-width));
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        pointer-events: auto;
+    }
+
+    /* ===== LAYOUT ===== */
+    .main-wrapper {
+        margin-left: 0 !important;
+        overflow-x: hidden !important;
+    }
+
+    body.sidebar-collapsed .main-wrapper {
+        margin-left: 0 !important;
+    }
+
+    .main {
+        padding: 15px;
+        min-height: calc(100vh - 60px - var(--footer-height));
+        overflow-x: hidden !important;
+        width: 100%;
+        max-width: 100vw;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+        padding: 15px;
+        height: auto;
+        min-height: 60px;
+    }
+
+
+    .welcome {
+        margin-left: 10px;
+        width: 100%;
+    }
+
+    .welcome p {
+        font-size: 12px;
+    }
+
+    .welcome p:first-child {
+        font-size: 14px;
+    }
+
+    .header-nav {
+        margin-left: auto !important;
+    }
+
+    .header-nav .nav-item {
+        margin-left: 8px;
+        padding: 8px;
+        height: 46px;
+    }
+    
+    .theme-toggle {
+        width: 30px;
+        height: 30px;
+    }
+
+    .time h3 {
+        font-size: 14px;
+    }
+
+    .time i {
+        font-size: 14px;
+    }
+
+    .birthday-dropdown {
+        width: 280px;
+        right: -10px;
+        top: 45px;
+    }
+
+    .birthday-item {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    /* ===== DASHBOARD - STATS ===== */
+    .stats-row {
+        margin-bottom: 0;
+    }
+
+    .stats-row > [class*="col-"] {
+        margin-bottom: 15px;
+    }
+
+    /* ===== DASHBOARD - ATTENDANCE CARD ===== */
+    #zeropad-col{
+        padding:0!important;
+        padding-left:0!important;
+        padding-right:0!important;
+    }
+    
+    .attendance-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .attendance-punch.punch-in,
+    .attendance-timer {
+        width: 100%;
+    }
+
+    .attendance-status {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .attendance-summary {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .summary-item h3 {
+        font-size: 18px;
+    }
+
+    .summary-item p {
+        font-size: 11px;
+    }
+
+    /* ===== DASHBOARD - WEEKLY CARD ===== */
+    .weekly-stats {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 12px;
+    }
+
+    .weekly-stat {
+        padding: 14px;
+    }
+
+    .weekly-chart {
+        overflow-x: auto !important;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        position: relative;
+    }
+
+    .chart-bars {
+        height: 160px;
+        width: 500px;
+        display: flex;
+        align-items: flex-end;
+        padding-right: 10px;
+    }
+
+    .chart-bars .day:first-of-type {
+        margin-left: 20px !important;
+    }
+
+    .bar-stack {
+        height: 110px;
+        flex-shrink: 0;
+    }
+
+    .day {
+        width: 55px;
+        min-width: 55px;
+        flex-shrink: 0;
+    }
+    
+    .day1{
+    margin-left:0px;
+}
+
+    .weekly-card .bar-stack .bar {
+        width: 24px !important;
+    }
+
+    .y-axis {
+        height: 140px;
+        position: sticky;
+        left: 0;
+        background: var(--sidebar-hover);
+        padding-right: 8px;
+        z-index: 2;
+        flex-shrink: 0;
+    }
+
+    .y-axis span {
+        font-size: 10px;
+    }
+
+    .weekly-chart::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .weekly-chart::-webkit-scrollbar-track {
+        background: var(--bg-card-soft);
+        border-radius: 4px;
+    }
+
+    .weekly-chart::-webkit-scrollbar-thumb {
+        background: var(--accent-primary);
+        border-radius: 4px;
+    }
+
+    /* ===== DASHBOARD - POLICIES ===== */
+    .policies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .policies-bottom {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* ===== DASHBOARD - NOTICE BOARD ===== */
+    .notice-list {
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .notice-list {
+        flex-direction:row;
+    }
+    .notice-board{
+        margin-top:30px;    
+    }
+    
+    .notice-board-body {
+        padding: 18px;
+    }
+
+    /* ===== FORMS ===== */
+    .main .row.g-3 {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .main .row.g-3 > [class*="col-"] {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .main input.form-control,
+    .main select.form-control,
+    .main textarea.form-control {
+        height: 42px;
+        font-size: 14px;
+    }
+
+    .main textarea.form-control {
+        height: auto !important;
+        min-height: 80px;
+    }
+
+    .main .card .card-body h5 {
+        font-size: 14px;
+        margin-bottom: 0px!important;
+    }
+    
+    .main .card-body hr {
+    margin: 10px 0 10px;
+    }
+
+    .main .form-group,
+    .main .col-md-6 {
+        /*margin-bottom: 15px;*/
+    }
+
+    .main label {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    .main .btn {
+        margin-top: 10px;
+    }
+
+    /* ===== TABLES ===== */
+    .main .card {
+        padding: 20px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .main .card-body {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 15px !important;
+    }
+
+    .main .table-responsive {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 10px;
+    }
+
+    .main .table {
+        width: max-content !important;
+        min-width: 100%;
+        font-size: 13px;
+    }
+
+    .main .table th,
+    .main .table td {
+        white-space: nowrap;
+    }
+
+    .main .table thead th {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .main .table tbody td {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .main .table td i {
+        font-size: 14px;
+        margin: 0 4px;
+    }
+
+    /* Table scrollbar */
+    .main .card-body::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .main .card-body::-webkit-scrollbar-track {
+        background: var(--bg-card-soft);
+        border-radius: 4px;
+    }
+
+    .main .card-body::-webkit-scrollbar-thumb {
+        background: var(--accent-primary);
+        border-radius: 4px;
+    }
+
+    /* Table scroll hint */
+    /*.main .card-body:has(.table)::after {*/
+    /*    content: '← Scroll to see more →';*/
+    /*    display: block;*/
+    /*    text-align: center;*/
+    /*    font-size: 11px;*/
+    /*    color: var(--text-muted);*/
+    /*    opacity: 0.5;*/
+    /*    margin-top: 10px;*/
+    /*    pointer-events: none;*/
+    /*}*/
+
+    .main .card-body.scrolled::after {
+        display: none;
+    }
+
+    /* ===== DATATABLE CONTROLS ===== */
+    .datatable-wrapper {
+        overflow-x: visible !important;
+    }
+
+    .datatable-top {
+        display: flex !important;
+        /*flex-direction: column !important;*/
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .datatable-dropdown,
+    .datatable-search {
+        width: 100% !important;
+    }
+
+    .datatable-input,
+    .datatable-selector {
+        max-width: 100% !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .datatable-bottom {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .datatable-info {
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .datatable-pagination {
+        justify-content: center !important;
+    }
+
+    .datatable-pagination-list {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* ===== BOOTSTRAP GRID FIXES ===== */
+    .container,
+    .container-fluid {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        overflow-x: hidden;
+    }
+
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100%;
+    }
+
+    .main [class*="col-"] {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .g-3 {
+        --bs-gutter-x: 1rem !important;
+        --bs-gutter-y: 1rem !important;
+    }
+
+    .row.g-3 > * {
+        padding-left: calc(var(--bs-gutter-x) * 0.5) !important;
+        padding-right: calc(var(--bs-gutter-x) * 0.5) !important;
+    }
+
+    /* ===== GLOBAL OVERFLOW PREVENTION ===== */
+    * {
+        max-width: 100%;
+    }
+
+    .table,
+    .chart-bars,
+    .datatable-table {
+        max-width: none !important;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    textarea {
+        max-width: 100%;
+        resize: vertical !important;
+    }
+
+    .table td {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* ===== TABLE BEHAVIOR CLASSES ===== */
+    .table.table-compact {
+        width: 100% !important;
+    }
+
+    .table.table-compact th,
+    .table.table-compact td {
+        white-space: normal;
+        padding: 10px 8px;
+    }
+
+    .table.table-scroll {
+        width: max-content !important;
+        min-width: 100%;
+    }
+
+    .table.table-scroll th,
+    .table.table-scroll td {
+        white-space: nowrap;
+        padding: 10px 12px;
+    }
+
+    .table.table-minimal th,
+    .table.table-minimal td {
+        padding: 6px 4px;
+        font-size: 10px;
+    }
+
+    /* SR NO / ID column */
+    .table th:first-child,
+    .table td:first-child {
+        min-width: 50px;
+        max-width: 70px;
+    }
+
+    /* Action column */
+    .table th:last-child,
+    .table td:last-child {
+        min-width: 80px;
+        /*max-width: 100px;*/
+        text-align: center;
+    }
+
+    /* Date columns */
+    .table td[class*='date'] {
+        min-width: 100px;
+    }
+
+    /* Status column */
+    .table td:has(.badge) {
+        min-width: 80px;
+    }
+}
+
+/* ==========================================
+   MOBILE (767px and down)
+========================================== */
+@media (max-width: 767px) {
+
+    /* ===== HEADER ===== */
+    .welcome {
+        display: none;
+    }
+    
+    .header-nav .nav-item {
+        margin-left: 5px;
+        padding: 6px;
+        height: 42px;
+    }
+
+    .header-nav .nav-icon {
+        font-size: 18px;
+        margin-right: 0;
+    }
+
+    .nav-profile .d-none.d-md-block {
+        display: none !important;
+    }
+
+    .theme-toggle {
+        width: 30px;
+        height: 30px;
+    }
+
+    .time h3 {
+        font-size: 12px;
+    }
+
+    /* ===== LAYOUT ===== */
+    .main {
+        padding: 10px;
+    }
+
+    .main .pagetitle h1 {
+        font-size: 18px;
+        margin-left:10px;
+    }
+
+    /* ===== DASHBOARD - STATS ===== */
+    .stats-card {
+        padding: 16px;
+    }
+
+    .stats-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+    }
+
+    .stats-label {
+        font-size: 14px;
+    }
+
+    .stats-value {
+        font-size: 24px;
+        margin: 4px 0 8px;
+    }
+
+    .stats-meta {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+
+    /* ===== DASHBOARD - ATTENDANCE ===== */
+    #zeropad-col{
+        padding:0!important;
+        padding-left:0!important;
+        padding-right:0!important;
+    }
+    
+    .attendance-main {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .attendance-card {
+        padding: 18px;
+    }
+
+    .attendance-header h4 {
+        font-size: 16px;
+    }
+
+    .attendance-header p {
+        font-size: 11px;
+    }
+
+    .attendance-clock {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+    }
+
+    .attendance-punch {
+        padding: 20px;
+    }
+
+    .punch-icon {
+        width: 46px;
+        height: 46px;
+        font-size: 18px;
+    }
+
+    .attendance-timer {
+        padding: 20px;
+    }
+
+    .attendance-timer h2 {
+        font-size: 24px;
+    }
+
+    .attendance-summary {
+        grid-template-columns: 1fr;
+    }
+
+    /* ===== DASHBOARD - WEEKLY ===== */
+    .weekly-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .weekly-card {
+        padding: 18px;
+    }
+
+    .weekly-header h4 {
+        font-size: 16px;
+    }
+
+    .weekly-stat h3 {
+        font-size: 20px;
+    }
+
+    .weekly-chart {
+        position: relative;
+        overflow-x: auto !important;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .weekly-chart::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .weekly-chart::-webkit-scrollbar-track {
+        background: var(--bg-soft);
+        border-radius: 10px;
+    }
+
+    .weekly-chart::-webkit-scrollbar-thumb {
+        background: var(--accent-primary);
+        border-radius: 10px;
+    }
+
+    .chart-bars {
+        height: 140px;
+        width: 480px !important;
+        display: flex;
+        align-items: flex-end;
+        padding-right: 10px;
+    }
+
+    .bar-stack {
+        height: 100px;
+        flex-shrink: 0;
+    }
+
+    .day {
+        width: 58px;
+        min-width: 58px;
+        flex-shrink: 0;
+    }
+
+    .weekly-card .bar-stack .bar {
+        width: 26px !important;
+    }
+
+    .day span {
+        font-size: 11px;
+        margin-top: 8px;
+    }
+
+    .y-axis {
+        height: 120px;
+        position: sticky;
+        left: 0;
+        background: var(--sidebar-hover);
+        z-index: 2;
+        flex-shrink: 0;
+    }
+
+    .y-axis span {
+        font-size: 9px;
+    }
+
+    /*.weekly-chart::after {*/
+    /*    content: '← Scroll →';*/
+    /*    position: absolute;*/
+    /*    bottom: 30px;*/
+    /*    right: 10px;*/
+    /*    font-size: 10px;*/
+    /*    color: var(--text-muted);*/
+    /*    opacity: 0.6;*/
+    /*    pointer-events: none;*/
+    /*}*/
+
+    /* ===== DASHBOARD - POLICIES ===== */
+    .policies-card {
+        padding: 18px;
+    }
+
+    .policies-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .policy-item {
+        padding: 18px;
+    }
+
+    .policy-tag {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+
+    .policy-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+        margin-top: 36px;
+    }
+
+    .policy-item h5 {
+        font-size: 14px;
+        margin: 20px 0 4px;
+    }
+
+    .policy-item p {
+        font-size: 12px;
+    }
+
+    /* ===== DASHBOARD - NOTICE BOARD ===== */
+    .notice-list {
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    
+    .notice-board{
+        margin-top:30px;
+    }
+    
+    .notice-board-body {
+        padding: 15px;
+    }
+
+    .notice-board-title {
+        font-size: 16px !important;
+    }
+
+    .notice-subtitle {
+        font-size: 11px;
+    }
+
+    .notice-bell {
+        width: 38px;
+        height: 38px;
+    }
+
+    .notice-item {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .notice-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .notice-content h6 {
+        font-size: 13px;
+    }
+
+    .notice-content p {
+        font-size: 12px;
+    }
+
+    /* ===== FORMS ===== */
+    /*.main .col-md-6,*/
+    /*.main .col-md-4,*/
+    /*.main .col-md-3,*/
+    /*.main .col-md-12 {*/
+    /*    flex: 0 0 100% !important;*/
+    /*    max-width: 100% !important;*/
+    /*}*/
+
+    .main .row.g-3 {
+        /*row-gap: 1rem !important;*/
+    }
+
+    .main .card {
+        padding: 15px;
+    }
+
+    .main .card-body h5 {
+        font-size: 14px;
+    }
+
+    .main input.form-control,
+    .main select.form-control,
+    .main textarea.form-control {
+        height: 40px;
+        font-size: 13px;
+    }
+
+    .main .btn-success,
+    .main .btn-primary {
+        padding: 6px 20px;
+        font-size: 14px;
+    }
+
+    .main .btn {
+        
+        padding: 10px;
+    }
+    
+    /*=======Nav Tabs=======*/
+    .nav-tabs,
+    .nav-tabs-bordered {
+        display: flex;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .nav-tabs .nav-item,
+    .nav-tabs-bordered .nav-item {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    /* ===== TABLES ===== */
+    .table-responsive {
+        border-radius: 10px;
+    }
+
+    .main .table thead th {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+
+    .main .table tbody td {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+
+    .main .card-body {
+        padding: 10px !important;
+    }
+
+    /* ===== TABLE BEHAVIOR BY COLUMN COUNT ===== */
+    .table[data-columns="1"],
+    .table[data-columns="2"],
+    .table[data-columns="3"] {
+        width: 100% !important;
+    }
+
+    .table[data-columns="1"] th,
+    .table[data-columns="1"] td,
+    .table[data-columns="2"] th,
+    .table[data-columns="2"] td,
+    .table[data-columns="3"] th,
+    .table[data-columns="3"] td {
+        white-space: normal;
+    }
+
+    .table[data-columns="4"],
+    .table[data-columns="5"] {
+        width: 100% !important;
+    }
+
+    .table[data-columns="4"] th,
+    .table[data-columns="4"] td,
+    .table[data-columns="5"] th,
+    .table[data-columns="5"] td {
+        white-space: normal;
+        font-size: 11px;
+        padding: 8px 6px;
+    }
+
+    .table[data-columns="6"],
+    .table[data-columns="7"] {
+        width: max-content !important;
+        min-width: 100%;
+    }
+
+    .table[data-columns="6"] th,
+    .table[data-columns="6"] td,
+    .table[data-columns="7"] th,
+    .table[data-columns="7"] td {
+        white-space: nowrap;
+        font-size: 11px;
+        padding: 8px 8px;
+    }
+
+    .table[data-columns="8"],
+    .table[data-columns="9"],
+    .table[data-columns="10"],
+    .table[data-columns="11"],
+    .table[data-columns="12"] {
+        width: max-content !important;
+        min-width: 100%;
+    }
+
+    .table[data-columns="8"] th,
+    .table[data-columns="8"] td,
+    .table[data-columns="9"] th,
+    .table[data-columns="9"] td,
+    .table[data-columns="10"] th,
+    .table[data-columns="10"] td,
+    .table[data-columns="11"] th,
+    .table[data-columns="11"] td,
+    .table[data-columns="12"] th,
+    .table[data-columns="12"] td {
+        white-space: nowrap;
+        font-size: 10px;
+        padding: 6px 6px;
+    }
+
+    /* ===== COLUMN TOGGLE ===== */
+    .table.hide-secondary-columns th:nth-child(n+6),
+    .table.hide-secondary-columns td:nth-child(n+6) {
+        display: none;
+    }
+
+    .table.hide-secondary-columns th:first-child,
+    .table.hide-secondary-columns th:last-child,
+    .table.hide-secondary-columns td:first-child,
+    .table.hide-secondary-columns td:last-child {
+        display: table-cell !important;
+    }
+
+    .column-toggle-btn {
+        display: inline-block;
+        margin-bottom: 10px;
+        font-size: 12px;
+        padding: 6px 12px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-light);
+        color: var(--text-primary);
+        border-radius: 8px;
+    }
+
+    .column-toggle-btn:hover {
+        background: var(--accent-hover-bg);
+        border-color: var(--accent-primary);
+        color: var(--accent-primary);
+    }
+
+    .column-toggle-btn i {
+        margin-right: 5px;
+    }
+}
+
+/* ==========================================
+   SMALL MOBILE (575px and down)
+========================================== */
+@media (max-width: 575px) {
+
+    /* ===== HEADER ===== */
+    .welcome {
+        display: none;
+    }
+
+    .header-nav .nav-item {
+        margin-left: 4px;
+        padding: 5px;
+    }
+
+    .birthday-dropdown {
+        width: calc(100vw - 30px);
+        left: 15px;
+        right: 15px;
+    }
+
+    .theme-toggle {
+        width: 28px;
+        height: 28px;
+    }
+
+    /* ===== LAYOUT ===== */
+    .sidebar {
+        height: 100%;
+    }
+
+    /* ===== DASHBOARD ===== */
+    .notice-board {
+        margin-top: 30px;
+    }
+    
+    .attendance-main {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    #zeropad-col{
+        padding:0!important;
+        padding-left:0!important;
+        padding-right:0!important;
+    }
+
+    .attendance-punch.punch-in {
+        width: 100%;
+    }
+
+    .attendance-timer {
+        width: 100%;
+    }
+
+    /*.stats-row > [class*="col-"] {*/
+    /*    flex: 0 0 100%;*/
+    /*    max-width: 100%;*/
+    /*}*/
+
+    /* ===== WEEKLY CHART ===== */
+    .weekly-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .weekly-chart {
+        position: relative;
+        overflow-x: auto !important;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .chart-bars {
+        height: 140px;
+        width: 450px !important;
+        min-width: 450px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        
+    }
+
+    .bar-stack {
+        height: 90px;
+    }
+
+    .day {
+        width: 45px;
+        min-width: 45px;
+        flex-shrink: 0;
+    }
+
+    .weekly-card .bar-stack .bar {
+        width: 18px !important;
+    }
+
+    .day span {
+        font-size: 10px;
+    }
+
+    .y-axis {
+        position: sticky;
+        left: 0;
+        background: var(--sidebar-hover);
+        padding-right: 5px;
+        z-index: 2;
+        flex-shrink: 0;
+    }
+
+    /*.weekly-chart::after {*/
+    /*    content: '⟷ Swipe';*/
+    /*    position: absolute;*/
+    /*    font-size: 9px;*/
+    /*    right: 5px;*/
+    /*    bottom: 5px;*/
+    /*    color: var(--text-muted);*/
+    /*    opacity: 0.5;*/
+    /*    pointer-events: none;*/
+    /*}*/
+
+    .weekly-chart::-webkit-scrollbar {
+        height: 5px;
+    }
+
+    .weekly-chart::-webkit-scrollbar-track {
+        background: var(--bg-card-soft);
+        border-radius: 4px;
+    }
+
+    .weekly-chart::-webkit-scrollbar-thumb {
+        background: var(--accent-primary);
+        border-radius: 4px;
+    }
+    
+    /*==========Notice=========*/
+    .notice-list {
+        display:grid;
+        grid-template-columns: 1fr;
+    }
+
+    /* ===== POLICIES ===== */
+    .policies-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .policies-card {
+        margin-top: 0;
+    }
+
+    .policies-bottom {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .policy-actions i {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+        margin-left: 6px;
+    }
+    
+    /*=======Nav Tabs=======*/
+    .nav-tabs,
+    .nav-tabs-bordered {
+        display: flex;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .nav-tabs .nav-item,
+    .nav-tabs-bordered .nav-item {
+        flex-shrink: 0;
+        white-space: nowrap;
+    }
+
+    /* ===== TABLES ===== */
+    .main .table {
+        font-size: 11px;
+    }
+
+    .main .table thead th,
+    .main .table td {
+        font-size: 11px;
+        padding: 8px 5px;
+        white-space: nowrap;
+    }
+
+    .card-body {
+        overflow-x: auto;
+    }
+
+    /* ===== DATATABLE ===== */
+    .datatable-input,
+    .datatable-selector {
+        height: 38px !important;
+        font-size: 12px !important;
+    }
+
+    .datatable-pagination-list-item-link {
+        min-width: 28px;
+        height: 28px;
+        padding: 0 8px;
+        font-size: 11px;
+    }
+
+    .main .table thead th,
+    .main .table tbody td {
+        padding: 6px 8px;
+        font-size: 14px;
+    }
+
+    .main .table td i {
+        font-size: 12px;
+        margin: 0 2px;
+    }
+}
+
+/* ==========================================
+   TABLE SCROLL HINT (All Breakpoints)
+========================================== */
+.table-scroll-hint {
+    text-align: center;
+    padding: 8px;
+    margin-top: 10px;
+    background: var(--accent-hover-bg);
+    border: 1px dashed var(--accent-primary);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 12px;
+    animation: pulse-hint 2s infinite;
+}
+
+.table-scroll-hint i {
+    color: var(--accent-primary);
+    margin-right: 5px;
+}
+
+@keyframes pulse-hint {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+.card-body.scrolled .table-scroll-hint {
+    display: none;
+}
+
+/* ==========================================
+   LANDSCAPE MOBILE FIX
+========================================== */
+@media (max-width: 991px) and (orientation: landscape) {
+    .main {
+        padding: 10px 15px;
+    }
+
+    .header {
+        padding: 10px 15px;
+        min-height: 50px;
+    }
+}
+

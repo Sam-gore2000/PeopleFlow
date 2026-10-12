@@ -1,0 +1,40 @@
+# SITE_ADDRESS (from .env):
+#   hrm.example.com  -> HTTPS with a free Let's Encrypt certificate (domain must point to this server)
+#   :80              -> plain HTTP (testing by IP address only)
+{$SITE_ADDRESS::80} {
+	encode zstd gzip
+
+	# API and uploaded files -> backend container
+	handle /api/* {
+		reverse_proxy backend:5000
+	}
+	handle /uploads/* {
+		reverse_proxy backend:5000
+	}
+
+	# React app (single page app: unknown paths fall back to index.html)
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+
+	# Built JS/CSS files have unique names, so they can be cached for a long time;
+	# index.html must always be fresh so updates show up straight away.
+	@assets path /assets/*
+	header @assets Cache-Control "public, max-age=31536000, immutable"
+	@html path / /index.html
+	header @html Cache-Control "no-cache"
+
+	header {
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		X-Frame-Options "SAMEORIGIN"
+		-Server
+	}
+
+	log {
+		output stdout
+		format console
+	}
+}

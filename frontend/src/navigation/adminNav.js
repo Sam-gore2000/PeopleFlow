@@ -1,0 +1,21 @@
+export const adminNav = [
+  { key: "dashboard", label: "Dashboard", icon: "bi-grid" },
+  { key: "employees", label: "Employee Details", icon: "bi-people" },
+  { key: "leaves", label: "Leave Details", icon: "bi-calendar4-week" },
+  { key: "attendance", label: "Attendance Details", icon: "bi-calendar-plus" },
+  { key: "breaks", label: "Break Report", icon: "bi-cup-hot" },
+  { key: "queries", label: "Query", icon: "bi-question-circle" },
+  { key: "bankDetails", label: "Compensation Details", icon: "bi-file-earmark-person" },
+  { key: "payslips", label: "Payslip Generate", icon: "bi-file-arrow-down" },
+  { key: "handbook", label: "Employee Handbook", icon: "bi-file-earmark-text" },
+  { key: "holidays", label: "Holidays", icon: "bi-calendar-check" },
+  { key: "notices", label: "HR Notice", icon: "bi-bell" },
+  { key: "admins", label: "Admin Access", icon: "bi-lock" },
+  // { key: "projects", label: "Project Details", icon: "bi-kanban" },
+  // { key: "teams", label: "Department", icon: "bi-diagram-3" },
+  // { key: "tasks", label: "Task Details", icon: "bi-list-task" },
+  // { key: "meetings", label: "Team Meeting", icon: "bi-camera-video" },
+  // { key: "dprs", label: "Daily Report", icon: "bi-journal-text" },
+  // { key: "timesheets", label: "Timesheet", icon: "bi-clock-history" },
+  // { key: "userLogs", label: "Login Details", icon: "bi-stopwatch" }
+];

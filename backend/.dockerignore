@@ -1,0 +1,12 @@
+# Never send these into the image
+node_modules
+npm-debug.log
+.env
+.env.*
+!.env.example
+uploads
+app
+sql
+requirements.txt
+*.log
+.git

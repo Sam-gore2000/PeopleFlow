@@ -1,0 +1,490 @@
+/* =====================================================================
+   Responsive layout: mobile menu, tablet / laptop spacing.
+   Loaded after legacy.css, responsive.css and app.css.
+   ===================================================================== */
+
+/* ---------- Sidebar toggle (a real button now) ---------- */
+.sidebar-logo .sidebar-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 20px;
+}
+
+.sidebar-logo .sidebar-toggle:hover {
+  color: var(--accent-primary);
+}
+
+/* ---------- Keyboard focus ---------- */
+.sidebar .nav-link:focus-visible,
+.sidebar-toggle:focus-visible,
+.logo-button:focus-visible,
+.header-menu-btn:focus-visible {
+  outline: 2px solid #00DAD2;
+  outline-offset: 2px;
+}
+
+/* ---------- Wide tables scroll inside their card, never the whole page ---------- */
+/* The content column may shrink to the screen width (flex items default to "as wide as the content"). */
+.main-wrapper,
+.main,
+.main .card,
+.main .card-body {
+  min-width: 0;
+}
+
+.main-wrapper {
+  max-width: 100%;
+}
+
+.table-responsive {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* ---------- Header menu button + monogram (phones / tablets only) ---------- */
+.header-mobile-brand {
+  display: none;
+}
+
+/* ---------- Laptops: the desktop page padding (180px a side) is too wide here ---------- */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .main {
+    padding: 20px 24px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1499px) {
+  .main {
+    padding: 20px 48px;
+  }
+}
+
+/* ---------- Phones and tablets ---------- */
+@media (max-width: 991px) {
+  .header-mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .header-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid var(--border-medium);
+    border-radius: 12px;
+    background: var(--bg-card-soft, transparent);
+    color: var(--text-primary);
+    font-size: 26px;
+    line-height: 1;
+  }
+
+  .header-menu-btn:active {
+    transform: scale(0.96);
+  }
+
+  .header-monogram {
+    width: 30px;
+    height: auto;
+  }
+
+  .header .welcome {
+    min-width: 0;
+  }
+
+  /* The sidebar slides in over the page. */
+  .sidebar {
+    width: min(var(--sidebar-width, 280px), 86vw);
+  }
+
+  /* The old overlay was part of the sidebar and couldn't be tapped; a real backdrop replaces it. */
+  body:not(.sidebar-collapsed) .sidebar::after {
+    display: none;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(3, 33, 31, 0.6);
+    backdrop-filter: blur(2px);
+    animation: sidebar-backdrop-in 0.2s ease-out;
+  }
+
+  /* Page behind the open menu doesn't scroll. */
+  body.sidebar-mobile-open {
+    overflow: hidden;
+  }
+
+  /* On mobile the sidebar always shows the full logo (never the collapsed icon layout). */
+  body:not(.sidebar-collapsed) .sidebar-logo {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  body:not(.sidebar-collapsed) .sidebar-logo .sidebar-toggle {
+    transform: none;
+  }
+
+  /* Bigger tap targets in the menu. */
+  .sidebar .nav-link {
+    min-height: 46px;
+  }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 575px) {
+  .header {
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .header-nav .nav-item {
+    margin-left: 4px;
+  }
+
+  .main {
+    padding: 12px;
+  }
+
+  /* Page titles and card padding a little tighter */
+  .main .pagetitle h1 {
+    font-size: 22px;
+  }
+
+  .main .card {
+    padding: 18px 14px;
+  }
+
+  /* Form buttons full width, easy to tap */
+  .main form .btn-success,
+  .main form .btn-outline-secondary {
+    min-height: 44px;
+  }
+}
+
+/* Very narrow phones: the live clock is the first thing to go. */
+@media (max-width: 380px) {
+  .header-nav .time,
+  .header-nav li:has(.time) {
+    display: none;
+  }
+}
+
+@keyframes sidebar-backdrop-in {
+  from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-backdrop {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* =====================================================================
+   Tables on phones / tablets: always scroll sideways, never cut text
+   ===================================================================== */
+@media (max-width: 991px) {
+  /* Every table keeps its natural width and scrolls inside its card
+     (the old rules squeezed 3-5 column tables to the screen width). */
+  .main .table-responsive > .table,
+  .main .table-responsive > table {
+    width: max-content !important;
+    min-width: 100%;
+  }
+
+  /* Show the whole value: no "..." cut-offs. Long text (reasons, notes, emails) wraps
+     inside a column of at most 260px instead of disappearing. */
+  .main .table-responsive > .table th,
+  .main .table-responsive > .table td {
+    max-width: 260px;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: break-word;
+    font-size: 13px;
+    padding: 10px 12px;
+    vertical-align: middle;
+  }
+
+  /* Headings, numbers and dates stay on one line */
+  .main .table-responsive > .table th,
+  .main .table-responsive > .table td:first-child {
+    white-space: nowrap;
+  }
+
+  .main .table-responsive > .table td:first-child,
+  .main .table-responsive > .table th:first-child {
+    max-width: none;
+    min-width: 48px;
+  }
+
+  /* Action buttons: side by side in one row, scrolled into view with the rest of the row */
+  .main .table-responsive > .table td:last-child {
+    max-width: none;
+  }
+
+  .main .table-responsive .row-actions {
+    flex-wrap: nowrap;
+    max-width: none;
+  }
+
+  .main .table-responsive .row-actions .btn-action {
+    width: auto;
+    white-space: nowrap;
+    padding: 6px 12px;
+  }
+
+}
+
+/* =====================================================================
+   Profile page on phones / tablets
+   ===================================================================== */
+@media (max-width: 1100px) {
+  /* One column that can never be wider than the screen */
+  .profile-page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .profile-page > *,
+  .profile-details,
+  .profile-details .card-body,
+  .profile-tab-body {
+    min-width: 0;
+  }
+
+  /* Tabs scroll sideways instead of stretching the page */
+  .profile-tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .profile-tabs::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Info cards: two columns only when there's room for them */
+@container (max-width: 460px) {
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 575px) {
+  .profile-summary .card-body {
+    padding: 26px 16px 22px;
+  }
+
+  .profile-details .card-body {
+    padding: 18px 14px 22px;
+  }
+
+  /* All three tabs visible: equal widths, labels may wrap onto two lines */
+  .profile-tabs {
+    overflow-x: visible;
+  }
+
+  .profile-tabs .nav-item {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .profile-tabs .nav-link {
+    width: 100%;
+    height: 100%;
+    padding: 10px 6px;
+    font-size: 13px;
+    line-height: 1.3;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .profile-section-title {
+    margin-top: 18px;
+  }
+
+  /* Password row: text takes the space, the Change button sits under it if needed */
+  .profile-info {
+    flex-wrap: wrap;
+  }
+
+  .profile-info-text {
+    flex: 1 1 140px;
+  }
+
+  .profile-password-change {
+    margin-left: 52px;
+  }
+
+  .profile-view-header {
+    align-items: flex-start;
+  }
+}
+
+/* =====================================================================
+   Scrollable tables (ScrollTable): hint bar, arrows, edge fade, scrollbar
+   ===================================================================== */
+.scroll-table {
+  position: relative;
+  min-width: 0;
+}
+
+.scroll-table-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.scroll-table-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.scroll-table-buttons {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.scroll-table-buttons button {
+  width: 36px;
+  height: 32px;
+  border-radius: 9px;
+  border: 1px solid var(--border-medium);
+  background: var(--bg-card-soft, transparent);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-table-buttons button:not(:disabled):hover {
+  border-color: #00DAD2;
+  color: #00DAD2;
+}
+
+.scroll-table-buttons button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.scroll-table-buttons button:focus-visible,
+.scroll-table .table-responsive:focus-visible {
+  outline: 2px solid #00DAD2;
+  outline-offset: 2px;
+}
+
+.scroll-table-viewport {
+  position: relative;
+}
+
+/* Fade on the side where columns are hidden */
+.scroll-table-viewport::before,
+.scroll-table-viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 12px;
+  width: 36px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+}
+
+.scroll-table-viewport::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-card), transparent);
+}
+
+.scroll-table-viewport::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-card), transparent);
+}
+
+.scroll-table.can-left .scroll-table-viewport::before,
+.scroll-table.can-right .scroll-table-viewport::after {
+  opacity: 1;
+}
+
+/* The scroller itself */
+.scroll-table .table-responsive {
+  overflow-x: auto !important;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
+  scrollbar-width: auto;
+  scrollbar-color: #00DAD2 var(--bg-card-soft, rgba(255, 255, 255, 0.06));
+}
+
+.scroll-table.can-left .table-responsive,
+.scroll-table.can-right .table-responsive {
+  cursor: grab;
+  padding-bottom: 4px;
+}
+
+.scroll-table .table-responsive.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+/* A scrollbar you can actually see (and grab) */
+.scroll-table .table-responsive::-webkit-scrollbar {
+  height: 10px;
+}
+
+.scroll-table .table-responsive::-webkit-scrollbar-track {
+  background: var(--bg-card-soft, rgba(255, 255, 255, 0.06));
+  border-radius: 10px;
+}
+
+.scroll-table .table-responsive::-webkit-scrollbar-thumb {
+  background: #00DAD2;
+  border-radius: 10px;
+  border: 2px solid var(--bg-card-soft, transparent);
+}
+
+body.light-mode .scroll-table .table-responsive::-webkit-scrollbar-thumb {
+  background: #06322F;
+}
+
+body.light-mode .scroll-table .table-responsive {
+  scrollbar-color: #06322F #EFF5F2;
+}
+
+/* Wide screens: the hint text isn't needed, the arrows stay */
+@media (min-width: 992px) {
+  .scroll-table-hint {
+    visibility: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-table-viewport::before,
+  .scroll-table-viewport::after {
+    transition: none;
+  }
+}

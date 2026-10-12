@@ -1,0 +1,21 @@
+# Secrets - never commit
+.env
+.env.*
+!.env.example
+!.env.docker.example
+backend/.env
+
+# Dependencies and build output
+node_modules/
+frontend/dist/
+
+# Uploaded files and backups (server data, not code)
+backend/uploads/
+uploads/
+backups/
+
+# Logs / OS files
+*.log
+error_log
+.DS_Store
+Thumbs.db
